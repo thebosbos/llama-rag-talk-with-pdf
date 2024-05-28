@@ -1,5 +1,6 @@
 from flask import Flask, request
 from database import *
+import threading
 
 app = Flask(__name__)
 
@@ -16,4 +17,5 @@ def hello():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Get port from environment variable or use default 5000
-    app.run(debug=True, host='0.0.0.0', port=port)  # Explicitly set host and port
+    flask_thread = threading.Thread( app.run(debug=True, host='0.0.0.0', port=port))# Explicitly set host and port
+    flask_thread.start()   
